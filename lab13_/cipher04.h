@@ -17,7 +17,7 @@ public:
     virtual std::string getPseudoAuth() { return "Noah Cook"; }
     virtual std::string getCipherName() { return "Noah's pig latin"; }
     virtual std::string getEncryptAuth() { return "Noah Cook"; }
-    virtual std::string getDecryptAuth() { return "Logan Holland"; }
+    virtual std::string getDecryptAuth() { return "Noah Cook"; }
 
     /***********************************************************
      * GET CIPHER CITATION
@@ -49,13 +49,17 @@ public:
     /**********************************************************
      * ENCRYPT
      * TODO: Encrypts the plainText into Noah's version of 
-     * piglatin. password is ignored
+     * piglatin. password must be pig for encryption.
      **********************************************************/
     virtual std::string encrypt(const std::string& plainText,
         const std::string& password)
     {
         std::string cipherText = plainText;
         char c = cipherText[0];
+
+        if (password != "pig") {
+            return plainText;
+        }
         
         if (c == 'A' || c == 'E' || c == 'I' || 
             c == 'O' || c == 'U' || c == 'a' || 
@@ -71,12 +75,15 @@ public:
     /**********************************************************
      * DECRYPT
      * TODO: Decrypts from Noah's piglatin into plainText.
-     * password is still ignored.
+     * password still needs to be pig
      **********************************************************/
     virtual std::string decrypt(const std::string& cipherText,
         const std::string& password)
     {
         std::string plainText = cipherText;
+        if (passsword != "pig") {
+            return cipherText;
+        }
         if (plainText[plainText.size() - 1] == '!') {
             return plainText.substr(0, plainText.size() - 4);
         }
