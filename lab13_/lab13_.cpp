@@ -118,12 +118,12 @@ public:
          plaintext = "I am just \"plain\" text.";
 
       // get the password
-      cout << "Please enter the password: ";
+      cout << "Please enter the password or key: ";
       getline(cin, password);
       if (password.compare("") == 0)
       {
          password = "Passw0rd!";
-         cout << "Default password: " << password << endl;
+         cout << "Default password or key: " << password << endl;
       }
    }
 

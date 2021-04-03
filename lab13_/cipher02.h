@@ -87,14 +87,29 @@ public:
 
     /**********************************************************
      * ENCRYPT
-     * TODO: ADD description
+     * TODO: Take the plainText and key and incorporate the plaintext 
+     *       into the key. To decrypt, one must use the agreed 
+     *       upon keyword for  both encryption and decryption.
      **********************************************************/
     virtual std::string encrypt(const std::string& plainText,
-        const std::string& password)
+        const std::string& key)
     {
-        std::string cipherText = plainText;
-        // TODO - Add your code here
-        return cipherText;
+        std::string ciphertext = plainText;
+        std::string stream = key + plainText;
+        std::string cipher = "";
+
+        for (int i = 0; i < plainText.length(); i++)
+        {
+            char temp = (char)(toupper(ciphertext[i]) + toupper(stream[i]) - 'A');
+
+            if (temp > 'Z')
+                temp -= 26;
+
+            if (temp != -1)
+                cipher += temp;
+        }
+
+        return cipher;
     }
 
     /**********************************************************
