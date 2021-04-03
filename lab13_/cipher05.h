@@ -45,7 +45,7 @@ public:
 	            "DECLARE row = 0\n"
 	            "DECLARE column = 0\n"
 	
-	            "For loop to put key into grid followed by alphabet (skip j)\n"
+	            "For loop to put key into grid followed by alphabet (skip j and repeated letters)\n"
 	
 	            "DECLARE String cipherText\n"
 	
