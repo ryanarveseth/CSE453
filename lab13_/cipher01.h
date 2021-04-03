@@ -127,8 +127,34 @@ public:
     virtual std::string encrypt(const std::string& plainText,
         const std::string& password)
     {
-        std::string cipherText = plainText;
-        // TODO - Add your code here
+        int key = stoi(password);
+
+        std::string cipherText = "";
+        char** rail = new char* [key];
+        for (int i = 0; i < key; i++) {
+            rail[i] = new char[plainText.length()];
+        }
+        bool down = false;
+        int row = 0;
+        int column = 0;
+        for (int r = 0; r < key; r++) {
+            for (int c = 0; c < plainText.length(); c++) {
+                rail[r][c] = '\0';
+            }
+        }
+        for (int c = 0; c < plainText.length(); c++) {
+            if (row == 0 || row == key - 1) {
+                down = !down;
+            }
+            rail[down ? row++ : row--][column++] = plainText[c];
+        }
+        for (int r = 0; r < key; r++) {
+            for (int c = 0; c < plainText.length(); c++) {
+                if (rail[r][c] != '\0') {
+                    cipherText += rail[r][c];
+                }
+            }
+        }
         return cipherText;
     }
 
