@@ -27,7 +27,7 @@ public:
      ***********************************************************/
     virtual std::string getCipherCitation()
     {
-        return std::string("citation");
+        return std::string("https://crypto.interactive-maths.com/polybius-square.html#:~:text=The%20Polybius%20Square%20is%20an,have%20one%20too%20many%20letters.");
     }
 
     /**********************************************************
