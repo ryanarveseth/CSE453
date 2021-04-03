@@ -16,7 +16,7 @@
 class Cipher05 : public Cipher
 {
 public:
-    virtual std::string getPseudoAuth() { return "pseudocode author"; }
+    virtual std::string getPseudoAuth() { return "Tyler DeFreitas"; }
     virtual std::string getCipherName() { return "cipher name"; }
     virtual std::string getEncryptAuth() { return "encrypt author"; }
     virtual std::string getDecryptAuth() { return "decrypt author"; }
@@ -40,10 +40,35 @@ public:
 
         // TODO: please format your pseudocode
         // The encrypt pseudocode
-        str = "insert the encryption pseudocode\n";
+        str = "START polybiusSquareEncrypt(plainText, key)\n"
+	            "DECLARE Character grid[5][5]\n"
+	            "DECLARE row = 0\n"
+	            "DECLARE column = 0\n"
+	
+	            "For loop to put key into grid followed by alphabet (skip j)\n"
+	
+	            "DECLARE String cipherText\n"
+	
+	            "For loop walk through plain text and find matching letter in grid\n"
+		        "cipherText += row\n"
+		        "cipherText += column\n"
+	            "RETURN cipherText\n"
+                "END polybiusSquareEncrypt\n";
 
         // The decrypt pseudocode
-        str += "insert the decryption pseudocode\n";
+        str += "START polybiusSquareDecrypt(ciperText, key)\n"
+	            "DECLARE Character grid[5][5]\n"
+	            "DECLARE row = 0\n"
+	            "DECLARE column = 0\n"
+	
+	            "For loop to put key into grid followed by alphabet (skip j)\n"
+	
+	            "DECLARE String plainText\n"
+	
+	            "For loop to walk through cipherText\n"
+		        "plainText += grid[ciphertext[i]] [ciphertext[i+1]]\n"
+	            "RETURN plainText\n"
+                "END polybiusSquareDecrypt\n";
 
         return str;
     }
