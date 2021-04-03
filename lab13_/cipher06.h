@@ -4,8 +4,8 @@
 *    Implement your cipher here. You can view 'example.h' to see the
 *    completed Caesar Cipher example.
 ********************************************************************/
-#ifndef CIPHER02_H
-#define CIPHER02_H
+#ifndef CIPHER06_H
+#define CIPHER06_H
 
 #include <string>
 #include "cipher.h"
@@ -13,12 +13,12 @@
 /********************************************************************
  * CLASS
  *******************************************************************/
-class Cipher02 : public Cipher
+class Cipher06 : public Cipher
 {
 public:
-    virtual std::string getPseudoAuth() { return "Logan Holland"; }
-    virtual std::string getCipherName() { return "autokey cipher"; }
-    virtual std::string getEncryptAuth() { return "Ryan Arveseth"; }
+    virtual std::string getPseudoAuth() { return "pseudocode author"; }
+    virtual std::string getCipherName() { return "cipher name"; }
+    virtual std::string getEncryptAuth() { return "encrypt author"; }
     virtual std::string getDecryptAuth() { return "decrypt author"; }
 
     /***********************************************************
@@ -40,47 +40,10 @@ public:
 
         // TODO: please format your pseudocode
         // The encrypt pseudocode
-        str =
-            "START autokeyEncrypt(plaintext, key)\n"
-            "    DECLARE STRING stream = key + plaintext\n"
-            "    DECLARE String ciphertext = \"\"\n"
-            "    FOR INTEGER i = 0; i < Length of plaintext; i += 1\n"
-            "        DECLARE CHARACTER temp = (CHARACTER)(plaintext[i].TOUPPER() + stream[i].TOUPPER() - 'A')\n"
-            "\n"
-            "        IF temp > 'Z'\n"
-            "            temp -= 26\n"
-            "        ENDIF\n"
-            "        ciphertext += temp\n"
-            "    ENDFOR\n"
-            "    RETURN ciphertext\n"
-            "END autokeyEncrypt\n"
-            "    \n"
-            "    \n";
-
+        str = "insert the encryption pseudocode\n";
 
         // The decrypt pseudocode
-        str += 
-        "START autokeyDecrypt(ciphertext, key)\n"
-        "    DECLARE String plaintext = ""\n"
-        "\n"
-        "    FOR Integer i = 0; i < Length of key; i += 1\n"
-        "        DECLARE CHARACTER temp = (CHARACTER)(ciphertext[i].TOUPPER() - key[i].TOUPPER() + 'A')\n"
-        "\n"
-        "        IF temp < 'A'\n"
-        "            temp += 26\n"
-        "        ENDIF\n"
-        "        plaintext += temp\n"
-        "    ENDFOR\n"
-        "    FOR INTEGER i = Length of key; i < Length of ciphertext; i += 1\n"
-        "        DECLARE CHARACTER temp = (CHARACTER)(ciphertext[i].TOUPPER() - plaintext[i - (Length of key)].TOUPPER() + 'A')\n"
-        "\n"
-        "        IF temp < 'A'\n"
-        "            temp += 26\n"
-        "        ENDIF\n"
-        "        plaintext += temp\n"
-        "    ENDFOR\n"
-        "    RETURN plaintext\n"
-        "End autokeyDecrypt\n";
+        str += "insert the decryption pseudocode\n";
 
         return str;
     }
@@ -110,4 +73,4 @@ public:
     }
 };
 
-#endif // CIPHER02_H
+#endif // CIPHER06_H

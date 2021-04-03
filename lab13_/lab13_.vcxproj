@@ -148,6 +148,8 @@
     <ClInclude Include="cipher03.h" />
     <ClInclude Include="cipher04.h" />
     <ClInclude Include="cipher05.h" />
+    <ClInclude Include="cipher06.h" />
+    <ClInclude Include="example.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

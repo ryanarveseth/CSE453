@@ -38,5 +38,11 @@
     <ClInclude Include="cipher05.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="example.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cipher06.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
