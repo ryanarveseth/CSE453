@@ -81,7 +81,67 @@ public:
         const std::string& password)
     {
         std::string cipherText = plainText;
-        // TODO - Add your code here
+    char alphabet[] = "abcdefghiklmnopqrstuvwxyz";
+    int n = sizeof(alphabet) / sizeof(alphabet[0]);
+ 
+    vector<char> vect(alphabet, alphabet + n);
+    char table[5][5];
+    int w = 0;
+    transform(password.begin(), password.end(), password.begin(), ::tolower);
+    for (int i = 0; i < 5; i++)
+    {
+      for (int j = 0; password[j] ; j++)
+      {
+        table[i][j] = password[w];
+        if (password[w])
+          w++;
+      }
+    }
+    int k = 0;
+    vector<char>::iterator it;
+    while (k < 5)
+      {
+        it = find(vect.begin(), vect.end(), key[k]);
+        vect.erase(it);
+        k++;
+      }
+    int row = (w % 5) + 1;
+    int column = (w / 5);
+
+    w = 0;
+    for (int i = row; i < 5; i++)
+    {
+      for (int j = 0; j < 5; j++)
+      {
+        table[i][j] = vect[w];
+        w++;
+      }
+    }
+    for (int i = 0; i < 5; i++)
+    {
+      for (int j = 0; j < 5; j++)
+      {
+        cout << table[i][j];
+      }
+      cout << endl;
+    }
+    
+   transform(plainText.begin(), plainText.end(), plainText.begin(), ::tolower);
+   for (int i = 0; plainText[i]; i++)
+   {
+     for (int r = 0; r < 5; r++)
+     {
+       for (int c = 0; c < 5; c++)
+       {
+         if (plainText[i] == table[r][c])
+         {
+           cipherText += to_string(r+1);
+           cipherText += to_string(c+1);
+         }
+       }
+     }
+    
+    }
         return cipherText;
     }
 
