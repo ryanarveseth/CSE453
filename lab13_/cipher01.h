@@ -27,7 +27,7 @@ public:
      ***********************************************************/
     virtual std::string getCipherCitation()
     {
-        return std::string("101Computing.net, The Rail Fence Cipher. 08 Oct. 2018.");
+        return std::string("101Computing.net, The Rail Fence Cipher. 08 Oct. 2018. [Online] Available: https://www.101computing.net/the-rail-fence-cipher/");
     }
 
     /**********************************************************
