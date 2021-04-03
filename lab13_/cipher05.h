@@ -9,7 +9,15 @@
 
 #include <string>
 #include "cipher.h"
-
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <fstream>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <ctype.h>
+#include <sstream>
 /********************************************************************
  * CLASS
  *******************************************************************/
