@@ -19,7 +19,7 @@ public:
     virtual std::string getPseudoAuth() { return "Logan Holland"; }
     virtual std::string getCipherName() { return "autokey cipher"; }
     virtual std::string getEncryptAuth() { return "Ryan Arveseth"; }
-    virtual std::string getDecryptAuth() { return "decrypt author"; }
+    virtual std::string getDecryptAuth() { return "Scott Malin"; }
 
     /***********************************************************
      * GET CIPHER CITATION
@@ -27,7 +27,11 @@ public:
      ***********************************************************/
     virtual std::string getCipherCitation()
     {
-        return std::string("citation");
+        std::string s;
+		s += "geeksforgeeks.com (2020), ";
+		s += "\"Autokey Cipher | Symmetric Ciphers\', \n   retrieved: ";
+		s += "https://www.geeksforgeeks.org/autokey-cipher-symmetric-ciphers/";
+        return s;
     }
 
     /**********************************************************
@@ -87,7 +91,7 @@ public:
 
     /**********************************************************
      * ENCRYPT
-     * TODO: Take the plainText and key and incorporate the plaintext 
+     *       Take the plainText and key and incorporate the plaintext 
      *       into the key. To decrypt, one must use the agreed 
      *       upon keyword for  both encryption and decryption.
      **********************************************************/
@@ -114,13 +118,35 @@ public:
 
     /**********************************************************
      * DECRYPT
-     * TODO: ADD description
+     * Takes the cipher text and the password and then recreates 
+     * the original string by using the first letter of the auto key
+     * and calculating what the original letters were based on the 
+     * subkeys.
      **********************************************************/
     virtual std::string decrypt(const std::string& cipherText,
         const std::string& password)
     {
-        std::string plainText = cipherText;
-        // TODO - Add your code here
+        std::string plainText = "";
+        for (int i = 0; i < password.length(); i++) 
+        {
+            char temp = (char)(std::toupper(cipherText[i]) - std::toupper(password[i]) + 'A');
+
+            if (temp < 'A') 
+            {
+                temp += 26;
+            }
+            plainText += temp;
+        }
+
+        for (int i = password.length(); i < cipherText.length(); i++)
+         {
+            char temp = (char)(std::toupper(cipherText[i]) - std::toupper(plainText[i - password.length()]) + 'A');
+            if (temp < 'A') 
+            {
+                temp += 26;
+            }
+            plainText += temp;
+        }
         return plainText;
     }
 };
