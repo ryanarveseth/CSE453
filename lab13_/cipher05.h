@@ -109,7 +109,7 @@ public:
     vector<char>::iterator it;
     while (k < 5)
       {
-        it = find(vect.begin(), vect.end(), key[k]);
+        it = find(vect.begin(), vect.end(), password[k]);
         vect.erase(it);
         k++;
       }
@@ -175,7 +175,7 @@ public:
     vector<char>::iterator it;
     while (k < 5)
       {
-        it = find(vect.begin(), vect.end(), key[k]);
+        it = find(vect.begin(), vect.end(), password[k]);
         vect.erase(it);
         k++;
       }
@@ -192,7 +192,7 @@ public:
       }
     }
 	
-    for (int i = 0; cip[i]; i += 2)
+    for (int i = 0; cipherText[i]; i += 2)
     {
     	int r = cipherText [i] - 49;
     	int c = cipherText [i+1] - 49;
