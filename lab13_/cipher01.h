@@ -96,7 +96,7 @@ public:
             "    DECLARE int i = 0\n"
             "    FOR INTEGER r = 0; r < key; r++\n"
             "       FOR INTEGER c = 0; c < LENGTH of ciphertext; c++\n"
-            "           IF rail[r][c] != '+' AND i < LENGTH of ciphertext\n"
+            "           IF rail[r][c] == '+' AND i < LENGTH of ciphertext\n"
             "               rail[r][c] = ciphertext[i++]\n"
             "           ENDIF\n"
             "       ENDFOR\n"
@@ -122,7 +122,8 @@ public:
 
     /**********************************************************
      * ENCRYPT
-     * TODO: ADD description
+     * Description: The rail fence cipher forms a "zig-zag" from
+     *              the plaintext and then displays it in a string
      **********************************************************/
     virtual std::string encrypt(const std::string& plainText,
         const std::string& password)
@@ -160,24 +161,24 @@ public:
 
     /**********************************************************
      * DECRYPT
-     * TODO: Iterate over our rail, then mark the places where we'll need text, then 
-     *       fill the array with our rail. Finally, iterate over object
-     *       again and finish 
+     * Description: Iterate over our rail, then mark the places where we'll need text, then
+     *              fill the array with our rail. Finally, iterate over object
+     *              again and finish
      **********************************************************/
-    virtual std::string decrypt(const std::string cipherText,
-        const std::string key)
+    virtual std::string decrypt(const std::string& cipherText,
+                                const std::string& password)
     {
         std::string plainText = cipherText;
-        const int keyInt = std::stoi(key);
+        const int key = std::stoi(password);
         const int pLength = plainText.length();
 
-        vector <vector<int> > rail(keyInt, vector<int>(pLength));
+        char rail[key][pLength];
         bool down = false;
 
         int row = 0;
         int column = 0;
 
-        for (int r = 0; r < keyInt; r++)
+        for (int r = 0; r < key; r++)
             for (int c = 0; c < plainText.length(); c++)
                 rail[r][c] = '\0';
 
@@ -185,18 +186,18 @@ public:
         {
             if (row == 0)
                 down = true;
-            else if (row == keyInt - 1)
+            else if (row == key - 1)
                 down = false;
 
             rail[down ? row++ : row--][column++] = '+';
         }
 
-        std::string decryptedText;
+        std::string decryptedText = "";
         int i = 0;
 
-        for (int r = 0; r < keyInt; r++)
+        for (int r = 0; r < key; r++)
             for (int c = 0; c < plainText.length(); c++)
-                if (rail[r][c] != '+' && i < plainText.length())
+                if (rail[r][c] == '+' && i < plainText.length())
                     rail[r][c] = plainText[i++];
 
         row = 0; 
@@ -206,7 +207,7 @@ public:
         {
             if (row == 0)
                 down = true;
-            else if (row == keyInt - 1)
+            else if (row == key - 1)
                 down = false;
 
             if (rail[row][column] != '+')

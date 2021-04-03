@@ -81,7 +81,7 @@ public:
         const std::string& password)
     {
         std::string plainText = cipherText;
-        if (passsword != "pig") {
+        if (password != "pig") {
             return cipherText;
         }
         if (plainText[plainText.size() - 1] == '!') {
