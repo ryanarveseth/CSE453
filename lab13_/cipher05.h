@@ -121,8 +121,8 @@ public:
    transform(plainText.begin(), plainText.end(), plainText.begin(), ::tolower);
    for (int i = 0; plainText[i]; i++)
    {
-   	if (text[i] == 'j');
-       		text[i] = 'i';
+   	if (plainText[i] == 'j');
+       		plainText[i] = 'i';
      for (int r = 0; r < 5; r++)
      {
        for (int c = 0; c < 5; c++)
