@@ -9,6 +9,8 @@
 
 #include <string>
 #include "cipher.h"
+#include <sstream>
+#include <vector>
 
 /********************************************************************
  * CLASS
@@ -30,7 +32,8 @@ public:
         return std::string("101Computing.net, The Rail Fence Cipher. 08 Oct. 2018. [Online] Available: https://www.101computing.net/the-rail-fence-cipher/");
     }
 
-    /**********************************************************
+    /****************************
+    ******************************
      * GET PSEUDOCODE
      * Returns the pseudocode as a string to be used by the caller.
      **********************************************************/
@@ -45,7 +48,7 @@ public:
             "   DECLARE column = 0\n"
             "   FOR INTEGER r = 0; r < key; r++\n"
             "       FOR INTEGER c = 0; c < LENGTH of text; c++\n"
-            "           rail[r][c] = '\\n';\n"
+            "           rail[r][c] = '\\0';\n"
             "       ENDFOR\n"
             "   ENDFOR\n"
             "   FOR INTEGER c = 0; c < LENGTH of text; c++\n"
@@ -57,7 +60,7 @@ public:
             "   DECLARE string ciphertext\n"
             "   FOR INTEGER r = 0; r < key; r++\n"
             "       FOR INTEGER c = 0; c < LENGTH of text; c++\n"
-            "           IF rail[r][c] != '\\n'\n"
+            "           IF rail[r][c] != '\\0'\n"
             "               ciphertext += rail[r][c]\n"
             "           ENDIF\n"
             "       ENDFOR\n"
@@ -77,7 +80,7 @@ public:
             "    DECLARE column = 0\n"
             "    FOR INTEGER r = 0; r < key; r++\n"
             "       FOR INTEGER c = 0; c < LENGTH of ciphertext; c++\n"
-            "           rail[r][c] = '\\n';\n"
+            "           rail[r][c] = '\\0';\n"
             "       ENDFOR\n"
             "    ENDFOR\n"
             "    FOR INTEGER c = 0; c < LENGTH of ciphertext; c++\n"
@@ -107,8 +110,8 @@ public:
             "           down = false;\n"
             "       ENDIF\n"
             "\n"
-            "       IF rail[row][col] != '+'\n"
-            "           text += rail[down ? row++ : row--][col++]\n"
+            "       IF rail[row][column] != '+'\n"
+            "           text += rail[down ? row++ : row--][column++]\n"
             "       ENDIF\n"
             "    ENDFOR\n"
             "    RETURN plaintext\n"
@@ -131,14 +134,60 @@ public:
 
     /**********************************************************
      * DECRYPT
-     * TODO: ADD description
+     * TODO: Iterate over our rail, then mark the places where we'll need text, then 
+     *       fill the array with our rail. Finally, iterate over object
+     *       again and finish 
      **********************************************************/
-    virtual std::string decrypt(const std::string& cipherText,
-        const std::string& password)
+    virtual std::string decrypt(const std::string cipherText,
+        const std::string key)
     {
         std::string plainText = cipherText;
-        // TODO - Add your code here
-        return plainText;
+        const int keyInt = std::stoi(key);
+        const int pLength = plainText.length();
+
+        vector <vector<int> > rail(keyInt, vector<int>(pLength));
+        bool down = false;
+
+        int row = 0;
+        int column = 0;
+
+        for (int r = 0; r < keyInt; r++)
+            for (int c = 0; c < plainText.length(); c++)
+                rail[r][c] = '\0';
+
+        for (int c = 0; c < plainText.length(); c++)
+        {
+            if (row == 0)
+                down = true;
+            else if (row == keyInt - 1)
+                down = false;
+
+            rail[down ? row++ : row--][column++] = '+';
+        }
+
+        std::string decryptedText;
+        int i = 0;
+
+        for (int r = 0; r < keyInt; r++)
+            for (int c = 0; c < plainText.length(); c++)
+                if (rail[r][c] != '+' && i < plainText.length())
+                    rail[r][c] = plainText[i++];
+
+        row = 0; 
+        column = 0;
+
+        for (int c = 0; c < plainText.length(); c++)
+        {
+            if (row == 0)
+                down = true;
+            else if (row == keyInt - 1)
+                down = false;
+
+            if (rail[row][column] != '+')
+                decryptedText += rail[down ? row++ : row--][column++];
+        }
+
+        return decryptedText;
     }
 };
 
